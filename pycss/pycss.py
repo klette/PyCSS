@@ -39,7 +39,7 @@ class PyCSS(object):
         # end of branch?
         end = True
         for value in node.values():
-            if not isinstance(value, basestring):
+            if not isinstance(value, basestring) and not isinstance(value, type(lambda: 1)):
                 end = False
                 break
         if end:
