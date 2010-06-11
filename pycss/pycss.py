@@ -20,7 +20,9 @@ class PyCSS(object):
         for key, value in node.items():
             if isinstance(value, basestring):
                 result += '%s: %s; ' % (key, value)
-            else:
+            elif isinstance(value, type(lambda: 1)):
+               result += '%s: %s; ' % (key, value())
+            elif isinstance(value, dict):
                 nodes_to_parse.append((key, value))
         if result:
             result += "}\n"
