@@ -1,6 +1,14 @@
 PyCSS
 =====
 
+Experimental python dict to css converter.
+
+Not as fancy as Sass and those things, but still kinda useful :-)
+
+You get variables and functions for free, and you can define values as lambdas
+if you want (but not keys just yet.)
+
+Have fun :-)
 
 Example::
 
