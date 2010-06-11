@@ -1,4 +1,5 @@
 import unittest
+from pycss import PyCSS
 
 FIXTURE_1 = {
     'code': {
@@ -17,11 +18,13 @@ FIXTURE_1 = {
             },
         }
     },
-    'result':"""#navbar { width: 100%; height: 23px; }
-#navbar ul { list-style-type: none; }
-#navbar li { float: left; }
-#navbar li a { font-weight: bold; }
-""",}
+    'result': [
+    '#navbar { width: 100%; height: 23px; }',
+    '#navbar ul { list-style-type: none; }',
+    '#navbar li { float: left; }',
+    '#navbar li a { font-weight: bold; }',
+    ]
+}
 
 FIXTURE_2 = {
     'code': {
@@ -43,20 +46,26 @@ FIXTURE_2 = {
             },
         }
     },
-    'result':"""#navbar { width: 100%; height: 23px; }
-#navbar ul { list-style-type: none; }
-#navbar li { float: left; }
-#navbar li a { font-weight: normal; }
-""",}
+    'result': [
+    '#foobar { width: 100%; }',
+    '#navbar { width: 100%; height: 23px; }',
+    '#navbar ul { list-style-type: none; }',
+    '#navbar li { float: left; }',
+    '#navbar li a { font-weight: normal; }',
+    ]}
 
 
-class PyCSS(unittest.TestCase):
+class TestParsing(unittest.TestCase):
+    def setUp(self):
+        self.pycss = PyCSS()
 
     def test_fixture_1_parsing(self):
-        from pycss import PyCSS
-        self.assertEquals(PyCSS.parse(FIXTURE_1['code']), FIXTURE_1['result'])
+        result = self.pycss.parse(FIXTURE_1['code'])
+        for expected in FIXTURE_1['result']:
+            self.assertTrue(expected in result)
 
     def test_fixture_2_parsing_callable_values(self):
-        from pycss import PyCSS
-        self.assertEquals(PyCSS.parse(FIXTURE_2['code']), FIXTURE_2['result'])
+        result = self.pycss.parse(FIXTURE_2['code'])
+        for expected in FIXTURE_2['result']:
+            self.assertTrue(expected in result)
 
