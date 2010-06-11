@@ -25,6 +25,9 @@ FIXTURE_1 = {
 
 FIXTURE_2 = {
     'code': {
+        '#foobar': {
+            'width': lambda: '100%',
+        },
         '#navbar': {
             'width': '100%',
             'height': '23px',
