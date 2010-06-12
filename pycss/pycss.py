@@ -4,39 +4,34 @@ class PyCSS(object):
 
     @classmethod
     def parse(cls, node, parents = None):
-        result = ''
+        result = []
         nodes_to_parse = []
 
         if parents:
-            result += "%s { " % " ".join(parents)
+            result.append("%s { " % " ".join(parents))
         else:
             parents = []
 
         for key, value in node.items():
-            if isinstance(value, basestring):
-                result += '%s: %s; ' % (key, value)
-            elif isinstance(value, type(lambda: 1)):
-               result += '%s: %s; ' % (key, value())
-            elif isinstance(value, dict):
+            if value.__class__.__name__ in ('str', 'unicode'):
+                result.append('%s: %s; ' % (key, value))
+            elif value.__class__.__name__ == 'function':
+               result.append('%s: %s; ' % (key, value()))
+            elif value.__class__.__name__ == 'dict':
                 nodes_to_parse.append((key, value))
         if result:
-            result += "}\n"
-
-        if result.endswith('{ }\n'):
-            result = ''
+            result.append("}\n")
 
         for n in nodes_to_parse:
-            d_parents = copy.copy(parents)
-            d_parents.append(n[0])
-            result += PyCSS.parse(n[1], d_parents)
+            result.append(PyCSS.parse(n[1], [p for p in parents] + [n[0]]))
 
         # end of branch?
         end = True
         for value in node.values():
-            if not isinstance(value, basestring) and not isinstance(value, type(lambda: 1)):
+            if value.__class__.__name__ not in ('str', 'unicode') and value.__class__.__name__ != 'function':
                 end = False
                 break
         if end:
             parents.pop()
 
-        return result
+        return "".join(result)
