@@ -56,7 +56,7 @@ FIXTURE_LAMBDA = {
 FIXTURE_COLORS = {
     'code': {
         '#foobar': {
-            'color': colors.tango_red1,
+            'color': colors.tango_aluminium[0],
             'width': lambda: '100%',
         },
         '#navbar': {
@@ -75,7 +75,7 @@ FIXTURE_COLORS = {
         }
     },
     'result': [
-    '#foobar { color: #123456; width: 100%; }',
+    '#foobar { color: #EEEEEC; width: 100%; }',
     '#navbar { width: 100%; height: 23px; }',
     '#navbar ul { list-style-type: none; }',
     '#navbar li { float: left; }',

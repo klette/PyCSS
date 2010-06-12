@@ -16,10 +16,9 @@ class TestParsing(unittest.TestCase):
         result = self.pycss.parse(FIXTURE_LAMBDA['code'])
         for expected in FIXTURE_LAMBDA['result']:
             self.assertTrue(expected in result)
-    
+
     def test_fixture_3_colors(self):
         result = self.pycss.parse(FIXTURE_COLORS['code'])
-        print result
         for expected in FIXTURE_COLORS['result']:
             self.assertTrue(expected in result)
 
