@@ -1,4 +1,3 @@
-import copy
 
 class PyCSS(object):
 
