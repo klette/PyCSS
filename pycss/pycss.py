@@ -3,19 +3,14 @@ import copy
 class PyCSS(object):
 
     @classmethod
-    def parse(cls, code):
-        result = ''
-        result += PyCSS._node_to_string(code, [])
-        return result
-
-
-    @classmethod
-    def _node_to_string(cls, node, parents):
+    def parse(cls, node, parents = None):
         result = ''
         nodes_to_parse = []
 
         if parents:
             result += "%s { " % " ".join(parents)
+        else:
+            parents = []
 
         for key, value in node.items():
             if isinstance(value, basestring):
@@ -30,11 +25,10 @@ class PyCSS(object):
         if result.endswith('{ }\n'):
             result = ''
 
-
         for n in nodes_to_parse:
             d_parents = copy.copy(parents)
             d_parents.append(n[0])
-            result += PyCSS._node_to_string(n[1], d_parents)
+            result += PyCSS.parse(n[1], d_parents)
 
         # end of branch?
         end = True
