@@ -43,7 +43,7 @@ PyCSS color library
 Tango Color Scheme
 ^^^^^^^^^^^^^^^^^^
 
-.. image:: doc/tango_colors.png
+.. image:: PyCSS/raw/master/doc/tango_colors.png
 
 
 Example::
