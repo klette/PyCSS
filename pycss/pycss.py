@@ -12,7 +12,7 @@ class PyCSS(object):
         else:
             parents = []
 
-        for key, value in node.items():
+        for key, value in node.iteritems():
             if value.__class__.__name__ in ('str', 'unicode'):
                 result.append('%s: %s; ' % (key, value))
             elif value.__class__.__name__ == 'function':
